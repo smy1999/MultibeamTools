@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import math
 
+
 class AGATable:
     """
     This class is used to convert .aga or .sga file produced by MBbackangle of MB-System
@@ -114,10 +115,8 @@ class AGATable:
                 data_array[i][1] = data_pa
 
         frame = pd.DataFrame(data_array, columns=['angle', self._metadata['DataType']])
-        print(frame)
         frame.to_excel(file_path + file_name, index=False)
-
-
+        return file_path + file_name
 
 
 if __name__ == '__main__':

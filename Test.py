@@ -1,15 +1,13 @@
 import pandas as pd
 from ConversionToolbox import AmplitudeGrazingAngle as AGA
-import math
+from CurveFittingToolbox import GSAB as cf
+
 
 def test_import():
-    file_path = 'C:/Users/86598/Downloads/1.txt'
     file_path2 = 'C:/Users/86598/Downloads/0158_20160830_025854_EX1607_MB.all.mb58.sga'
     file_path3 = 'C:/Users/86598/Downloads/0158_20160830_025854_EX1607_MB.all.mb58.aga'
-    file_path3 = 'sdf'
-    a = AGA.AGATable(file_path2)
-    b = AGA.AGATable(file_path2)
     c = AGA.AGATable(file_path3)
+
 
 def test_rdxls():
     path = 'C:/Users/86598/PycharmProjects/MultibeamTools/'
@@ -19,9 +17,30 @@ def test_rdxls():
     print(data)
     print(type(data))
 
-def test():
-    print(math.pow(2,3))
 
+def test():
+    sup = {'A': -30,
+           'B': 0,
+           'C': -55,
+           'D': 0,
+           'E': -55,
+           'F': 0}
+    inf = {'A': -10,
+           'B': 10,
+           'C': -15,
+           'D': 2.5,
+           'E': -20,
+           'F': 40}
+    cf.standard2original(sup)
+    cf.standard2original(inf)
+    list1 = []
+    list2 = []
+    for i, key in enumerate(['A', 'B', 'C', 'D', 'E', 'F']):
+        list1.append(sup[key])
+        list2.append(inf[key])
+
+    print(list1)
+    print(list2)
 
 
 if __name__ == '__main__':
