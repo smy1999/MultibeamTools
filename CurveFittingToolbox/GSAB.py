@@ -7,9 +7,9 @@ default_bounds = ([0.001, 0.0, 3.162277660168379e-06, 0, 3.162277660168379e-06, 
                   [0.1, 0.17453292519943295, 0.03162277660168379, 2.5, 0.01, 0.6981317007977318])
 
 
-def fitGSAB(x, y, bounds=default_bounds, if_plot=True, maxfev=10000,
-            fmt1='b-', fmt2='r-', unit_y_in='dB', unit_x_in='rad',
-            parameters_pattern='standard', if_print_parameters=True):
+def fitGSAB(x, y, bounds=default_bounds, maxfev=10000, fmt1='b-', fmt2='r-',
+            unit_y_in='dB', unit_x_in='rad', parameters_pattern='standard',
+            if_plot=True, if_print_parameters=True, if_save_img=False):
     assert (-math.pi / 2 <= x).all() and (x <= math.pi / 2).all(), \
         'x is out of range([-pi / 2, pi / 2]).'
     assert unit_y_in == 'dB' or unit_y_in == 'Pa', \
@@ -32,12 +32,15 @@ def fitGSAB(x, y, bounds=default_bounds, if_plot=True, maxfev=10000,
     if parameters_pattern == 'standard':
         original2standard(parameters)
 
-    if if_plot:
+    if if_plot or if_save_img:
         plt.plot(xconvert(x, unit_in='rad'), yconvert(y, unit_in='Pa'), fmt1)
         plt.plot(xconvert(x, unit_in='rad'), yconvert(GSAB(x, *popt), unit_in='Pa'), fmt2)
         plt.xlabel('Incident Angle(°)')
         plt.ylabel('Backscatter(dB)')
-        plt.show()
+        if if_save_img:
+            plt.savefig('GSAB_fitting.png')
+        if if_plot:
+            plt.show()
 
     if if_print_parameters:
         print_parameters(parameters)

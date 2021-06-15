@@ -18,7 +18,7 @@ def test_rdxls():
     print(type(data))
 
 
-def test():
+def test_unit():
     sup = {'A': -30,
            'B': 0,
            'C': -55,
@@ -41,6 +41,31 @@ def test():
 
     print(list1)
     print(list2)
+
+
+def test_write_img():
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    image = np.random.randn(100, 100)
+    plt.imsave('new_1.png', image)
+
+
+def test_new_curve():
+    from ConversionToolbox import AmplitudeGrazingAngle as aga
+    from CurveFittingToolbox import GSAB as cf
+    import pandas as pd
+    file_path = 'D:/Study/mbsystem/mbbackangle/compare/0158_20160830_025854_EX1607_MB_slope.all.mb58_tot.aga'
+    table = aga.AGATable(file_path)
+    xls_path = '../'
+    xls_name = table.write_xls(xls_path)
+    df = pd.read_excel(xls_name, engine='openpyxl')
+    x = df['angle'].values
+    y = df['beam amplitude'].values
+
+    x = cf.xconvert(x, 'degree')
+    x, y = cf.get_interval(x, y)
+    cf.fitGSAB(x, y, if_save_img=True)
 
 
 if __name__ == '__main__':

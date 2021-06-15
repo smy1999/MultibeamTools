@@ -9,9 +9,6 @@ class AGATable:
     This class is used to convert .aga or .sga file produced by MBbackangle of MB-System
     to other format in order to better process the data.
     """
-    _metadata = {}
-    _tables = []
-    _is_tot = False
 
     def __init__(self, file_path):
         """
@@ -19,7 +16,11 @@ class AGATable:
         :param file_path: .sga or .aga file path.
         """
         assert file_path.endswith('.sga') or file_path.endswith('.aga'), 'Only .sga and .aga file are valid.'
+
         self._is_tot = file_path.endswith('_tot.sga') or file_path.endswith('_tot.aga')
+        self._metadata = {}
+        self._tables = []
+
         with open(file_path, 'r') as f:
             for i in range(5):
                 f.readline()
@@ -69,7 +70,6 @@ class AGATable:
                     this_line = " ".join(this_line.split())
                     angle, data, standard_deviation = this_line.split(' ')
                     table_data.append((float(angle), float(data), float(standard_deviation)))
-                    # print(this_line)
 
                 self._tables.append({'metadata': table_metadata, 'data': table_data})
                 f.readline()
