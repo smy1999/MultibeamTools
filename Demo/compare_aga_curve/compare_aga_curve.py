@@ -13,7 +13,7 @@ def test():
     """
     Compare amplitude versus angle curve with and without slope data.
     """
-    file_path = 'D:/Study/mbsystem/mbbackangle/compare/'
+    file_path = '../compare_aga_curve/'
     file_name1 = '0158_20160830_025854_EX1607_MB.all.mb58_tot.aga'
     file_name2 = '0158_20160830_025854_EX1607_MB_slope.all.mb58_tot.aga'
     table1 = aga.AGATable(file_path + file_name1)
@@ -60,7 +60,7 @@ def fitGSAB(x1, y1, x2, y2, bounds=default_bounds, maxfev=10000,
         plt.xlabel('Incident Angle(°)')
         plt.ylabel('Backscatter(dB)')
         if if_save_img:
-            plt.savefig('GSAB_fittin.png')
+            plt.savefig('GSAB_fitting.png')
         if if_plot:
             plt.show()
 

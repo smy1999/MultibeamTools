@@ -113,14 +113,13 @@ class AGATable:
                 data_array[i][0] = data[0]
                 data_pa = 0 if data[1] == 0 else math.pow(10, data[1] / 10)
                 data_array[i][1] = data_pa
-
         frame = pd.DataFrame(data_array, columns=['angle', self._metadata['DataType']])
         frame.to_excel(file_path + file_name, index=False)
         return file_path + file_name
 
 
 if __name__ == '__main__':
-    file = 'D:/Study/mbsystem/mbbackangle/0158_20160830_025854_EX1607_MB.all.mb58_tot.aga'
+    file = 'D:/Study/mbsystem/mbbackangle/test/0158_20160830_025854_EX1607_MB.all.mb58_tot.aga'
     # file_path = 'D:/Study/mbsystem/mbbackangle/0158_20160830_025854_EX1607_MB.all.mb58.aga'
     a = AGATable(file)
 
